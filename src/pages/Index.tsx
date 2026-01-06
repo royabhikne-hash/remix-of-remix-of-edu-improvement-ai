@@ -8,6 +8,7 @@ import WhoWeServeSection from "@/components/sections/WhoWeServeSection";
 import WhyUsSection from "@/components/sections/WhyUsSection";
 import TrustSection from "@/components/sections/TrustSection";
 import TeamSection from "@/components/sections/TeamSection";
+import ContactSection from "@/components/sections/ContactSection";
 import CTASection from "@/components/sections/CTASection";
 
 const Index = () => {
@@ -53,6 +54,7 @@ const Index = () => {
           <WhyUsSection />
           <TrustSection />
           <TeamSection />
+          <ContactSection />
           <CTASection />
         </main>
         <Footer />
