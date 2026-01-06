@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Send, Building2, Mail, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -54,16 +55,34 @@ const ContactSection = () => {
       return;
     }
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: result.data.name,
+        school_name: result.data.schoolName,
+        email: result.data.email,
+        message: result.data.message,
+      });
 
-    toast({
-      title: "Inquiry Submitted!",
-      description: "Thank you for your interest. We'll get back to you within 24 hours.",
-    });
+      if (error) {
+        throw error;
+      }
 
-    setFormData({ name: "", schoolName: "", email: "", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Inquiry Submitted!",
+        description: "Thank you for your interest. We'll get back to you within 24 hours.",
+      });
+
+      setFormData({ name: "", schoolName: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your inquiry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
