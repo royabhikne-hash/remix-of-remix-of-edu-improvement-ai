@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Users, School, GraduationCap } from "lucide-react";
+import { ArrowRight, GraduationCap } from "lucide-react";
 import heroImage from "@/assets/hero-students.jpg";
 
 const HeroSection = () => {
@@ -16,11 +16,6 @@ const HeroSection = () => {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const stats = [
-    { icon: GraduationCap, value: "10,000+", label: "Students Supported" },
-    { icon: School, value: "150+", label: "Partner Schools" },
-    { icon: Users, value: "25,000+", label: "Parents Informed" },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -105,29 +100,6 @@ const HeroSection = () => {
               </Button>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-border"
-            >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="text-center lg:text-left"
-                >
-                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-                    <stat.icon className="w-5 h-5 text-primary" />
-                    <span className="text-2xl md:text-3xl font-heading text-foreground">
-                      {stat.value}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Hero Image with Parallax */}

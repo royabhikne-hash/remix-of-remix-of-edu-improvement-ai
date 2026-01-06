@@ -89,8 +89,7 @@ const CTASection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-lg text-muted-foreground leading-relaxed mb-10"
           >
-            Join hundreds of schools across India in creating better, more
-            transparent learning experiences for students.
+            Let's create better, more transparent learning experiences for students together.
           </motion.p>
 
           <motion.div
