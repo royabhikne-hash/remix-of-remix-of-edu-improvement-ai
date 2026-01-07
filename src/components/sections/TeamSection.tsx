@@ -15,7 +15,7 @@ const TeamSection = () => {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
-  const team = [
+  const coreTeam = [
     {
       name: "Abhishek Roy",
       role: "Founder & CEO",
@@ -46,6 +46,33 @@ const TeamSection = () => {
       mission:
         "Builds student-facing and school dashboard interfaces with mobile-first focus.",
       image: subhamImage,
+      linkedin: "#",
+    },
+  ];
+
+  const opsTeam = [
+    {
+      name: "Shivraj Kumar Yadav",
+      role: "Chief Operating Officer",
+      mission:
+        "Manages operations, school onboarding strategy, partnerships, and execution on the ground.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      linkedin: "#",
+    },
+    {
+      name: "Shivam",
+      role: "Ground Operations Team",
+      mission:
+        "Works directly with schools for demos, onboarding, feedback collection, and daily coordination.",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      linkedin: "#",
+    },
+    {
+      name: "Avinav",
+      role: "Ground Operations Team",
+      mission:
+        "Supports school outreach, presentations, follow-ups, and on-ground execution.",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
       linkedin: "#",
     },
   ];
@@ -122,6 +149,7 @@ const TeamSection = () => {
           </motion.p>
         </motion.div>
 
+        {/* Core Team */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -129,7 +157,7 @@ const TeamSection = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
         >
-          {team.map((member, index) => (
+          {coreTeam.map((member, index) => (
             <motion.div
               key={member.name}
               variants={cardVariants}
@@ -150,7 +178,6 @@ const TeamSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8 }}
                 />
-                {/* Overlay on hover */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -202,6 +229,110 @@ const TeamSection = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Operations & Ground Team */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center mt-16 mb-10"
+        >
+          <span className="inline-block text-primary font-medium text-xs md:text-sm uppercase tracking-wide">
+            Operations & Ground Team
+          </span>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto"
+        >
+          {opsTeam.map((member, index) => (
+            <motion.div
+              key={member.name}
+              variants={cardVariants}
+              whileHover={{ y: -10 }}
+              className="group text-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="relative mb-3 md:mb-6 overflow-hidden rounded-xl md:rounded-2xl"
+              >
+                <motion.img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full aspect-square object-cover"
+                  initial={{ scale: 1.1 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent flex items-end justify-center pb-4"
+                >
+                  <div className="flex gap-3">
+                    <motion.a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-10 h-10 bg-primary-foreground/20 backdrop-blur-sm rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
+                      aria-label={`${member.name}'s LinkedIn`}
+                    >
+                      <Linkedin size={18} />
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.h3
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                className="text-base md:text-xl font-heading text-foreground mb-0.5 md:mb-1 group-hover:text-primary transition-colors"
+              >
+                {member.name}
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.35 + index * 0.1 }}
+                className="text-primary font-medium text-xs md:text-sm mb-2 md:mb-3"
+              >
+                {member.role}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + index * 0.1 }}
+                className="text-muted-foreground text-xs md:text-sm italic leading-relaxed hidden sm:block"
+              >
+                "{member.mission}"
+              </motion.p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Team Statement */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-muted-foreground text-sm md:text-base italic mt-12 max-w-3xl mx-auto"
+        >
+          "A team combining strong technology execution with deep on-ground school-level understanding to build a real improvement system for students."
+        </motion.p>
       </div>
     </section>
   );
