@@ -5,6 +5,7 @@ import abhishekRoyImage from "@/assets/abhishek-roy.png";
 import ashvethPawarImage from "@/assets/ashveth-pawar.jpg";
 import deepikaSharmaImage from "@/assets/deepika-sharma.jpg";
 import subhamImage from "@/assets/subham.jpg";
+import zulfequarAhmadImage from "@/assets/zulfequar-ahmad.jpg";
 
 const TeamSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,7 +57,7 @@ const TeamSection = () => {
       role: "Chief Operating Officer",
       mission:
         "Leads overall operations, strategic partnerships, and ensures seamless execution across all teams.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      image: zulfequarAhmadImage,
       linkedin: "#",
     },
     {
