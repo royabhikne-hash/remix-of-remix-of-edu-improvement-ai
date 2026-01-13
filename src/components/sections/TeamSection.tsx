@@ -1,10 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Linkedin } from "lucide-react";
-import abhishekRoyImage from "@/assets/abhishek-roy.png";
+import abhishekRoyImage from "@/assets/abhishek-roy.jpg";
 import ashvethPawarImage from "@/assets/ashveth-pawar.jpg";
 import deepikaSharmaImage from "@/assets/deepika-sharma.jpg";
-import subhamImage from "@/assets/subham.jpg";
 import zulfequarAhmadImage from "@/assets/zulfequar-ahmad.jpg";
 import shivrajYadavImage from "@/assets/shivraj-yadav.jpg";
 import shivamImage from "@/assets/shivam.jpg";
@@ -49,7 +48,7 @@ const TeamSection = () => {
       role: "Frontend Developer",
       mission:
         "Builds student-facing and school dashboard interfaces with mobile-first focus.",
-      image: subhamImage,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
       linkedin: "#",
     },
   ];
