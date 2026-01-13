@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Send, Mail, MessageSquare } from "lucide-react";
+import { Send, Mail, MessageSquare, Phone, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -123,9 +123,28 @@ const ContactSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-foreground mb-4">
             Interested in a Franchise?
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fill out the form below or email us at <a href="mailto:royabhikne@gmail.com" className="text-primary hover:underline">royabhikne@gmail.com</a>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+            Fill out the form below or reach out to us directly
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-muted-foreground">
+            <a href="tel:+917091165195" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Phone className="w-5 h-5" />
+              <span>+91 7091165195</span>
+            </a>
+            <a href="tel:+919473255104" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Phone className="w-5 h-5" />
+              <span>+91 9473255104</span>
+            </a>
+            <a href="mailto:royabhikne@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Mail className="w-5 h-5" />
+              <span>royabhikne@gmail.com</span>
+            </a>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-5 h-5" />
+              <span>Kishanganj, Bihar, India</span>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
