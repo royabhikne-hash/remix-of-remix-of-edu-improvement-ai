@@ -94,6 +94,11 @@ const Header = () => {
                 <Button variant="hero" className="w-full">
                   Request Demo
                 </Button>
+                <a href="/admin" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full text-muted-foreground">
+                    Admin
+                  </Button>
+                </a>
               </div>
             </div>
           </motion.div>
