@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Phone, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Message = {
@@ -11,12 +11,20 @@ type Message = {
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/franchise-chat`;
 
+const quickActions = [
+  { label: "💰 Investment Details", message: "Franchise में कितना investment लगता है?" },
+  { label: "📍 Territory Info", message: "कौन से territories available हैं?" },
+  { label: "📊 ROI & Returns", message: "ROI कितने time में मिलता है?" },
+  { label: "📝 Apply Now", message: "मुझे franchise लेनी है, कैसे apply करूं?" },
+];
+
 const FranchiseChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "नमस्ते! 👋 मैं Edu Improvement AI का फ्रैंचाइज़ असिस्टेंट हूं। मैं आपकी फ्रैंचाइज़ के बारे में जानकारी देने में मदद कर सकता हूं। आप कुछ भी पूछ सकते हैं!",
+      content: "नमस्ते! 👋 मैं Edu Improvement AI का फ्रैंचाइज़ असिस्टेंट हूं।\n\n🎯 हमारे पास 3 franchise models हैं:\n• City Franchise: ₹15-20 Lakhs\n• District Franchise: ₹8-12 Lakhs\n• School Partner: ₹3-5 Lakhs\n\nनीचे दिए buttons पर click करें या कोई भी सवाल पूछें!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -91,10 +99,12 @@ const FranchiseChatbot = () => {
     }
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (messageText?: string) => {
+    const text = messageText || input.trim();
+    if (!text || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: input.trim() };
+    setShowQuickActions(false);
+    const userMessage: Message = { role: "user", content: text };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setInput("");
@@ -113,6 +123,14 @@ const FranchiseChatbot = () => {
       ]);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const scrollToContact = () => {
+    setIsOpen(false);
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -180,7 +198,7 @@ const FranchiseChatbot = () => {
                     {msg.role === "user" ? <User size={16} /> : <Bot size={16} />}
                   </div>
                   <div
-                    className={`max-w-[75%] p-3 rounded-2xl text-sm ${
+                    className={`max-w-[75%] p-3 rounded-2xl text-sm whitespace-pre-line ${
                       msg.role === "user"
                         ? "bg-primary text-primary-foreground rounded-br-md"
                         : "bg-muted text-foreground rounded-bl-md"
@@ -190,6 +208,25 @@ const FranchiseChatbot = () => {
                   </div>
                 </div>
               ))}
+
+              {/* Quick Action Buttons */}
+              {showQuickActions && messages.length === 1 && !isLoading && (
+                <div className="space-y-2">
+                  <p className="text-xs text-muted-foreground text-center">Quick options:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {quickActions.map((action, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSend(action.message)}
+                        className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                      >
+                        {action.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {isLoading && messages[messages.length - 1]?.role === "user" && (
                 <div className="flex gap-2">
                   <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
@@ -207,8 +244,19 @@ const FranchiseChatbot = () => {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Contact Form CTA */}
+            <div className="px-4 py-2 bg-accent/50 border-t border-border">
+              <button
+                onClick={scrollToContact}
+                className="w-full flex items-center justify-center gap-2 text-sm text-primary hover:underline"
+              >
+                <Mail size={14} />
+                Contact Form भरें - 24 घंटे में call back
+              </button>
+            </div>
+
             {/* Input */}
-            <div className="p-4 border-t border-border">
+            <div className="p-3 border-t border-border">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -220,7 +268,7 @@ const FranchiseChatbot = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="अपना सवाल पूछें..."
-                  className="flex-1"
+                  className="flex-1 text-sm"
                   disabled={isLoading}
                 />
                 <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
