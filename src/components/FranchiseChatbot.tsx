@@ -12,10 +12,10 @@ type Message = {
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/franchise-chat`;
 
 const quickActions = [
-  { label: "💰 Investment Details", message: "Franchise में कितना investment लगता है?" },
-  { label: "📍 Territory Info", message: "कौन से territories available हैं?" },
-  { label: "📊 ROI & Returns", message: "ROI कितने time में मिलता है?" },
-  { label: "📝 Apply Now", message: "मुझे franchise लेनी है, कैसे apply करूं?" },
+  { label: "🎓 About Us", message: "Edu Improvement AI क्या है?" },
+  { label: "📚 Features", message: "आपके platform की main features क्या हैं?" },
+  { label: "🏫 For Schools", message: "Schools के लिए यह कैसे helpful है?" },
+  { label: "📞 Contact", message: "आपसे कैसे संपर्क करें?" },
 ];
 
 const FranchiseChatbot = () => {
@@ -24,7 +24,7 @@ const FranchiseChatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "नमस्ते! 👋 मैं Edu Improvement AI का फ्रैंचाइज़ असिस्टेंट हूं।\n\n🎯 हमारे पास 3 franchise models हैं:\n• City Franchise: ₹15-20 Lakhs\n• District Franchise: ₹8-12 Lakhs\n• School Partner: ₹3-5 Lakhs\n\nनीचे दिए buttons पर click करें या कोई भी सवाल पूछें!",
+      content: "नमस्ते! 👋 मैं Edu Improvement AI का assistant हूं।\n\n🎓 हम India का leading AI-powered study companion हैं जो Class 6-12 के students को better self-study habits develop करने में मदद करता है।\n\nनीचे दिए buttons पर click करें या कोई भी सवाल पूछें!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -168,8 +168,8 @@ const FranchiseChatbot = () => {
                   <Bot size={20} />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Franchise Assistant</h3>
-                  <p className="text-xs opacity-80">फ्रैंचाइज़ सहायक</p>
+                  <h3 className="font-semibold">Edu AI Assistant</h3>
+                  <p className="text-xs opacity-80">आपका सहायक</p>
                 </div>
               </div>
               <button
@@ -251,7 +251,7 @@ const FranchiseChatbot = () => {
                 className="w-full flex items-center justify-center gap-2 text-sm text-primary hover:underline"
               >
                 <Mail size={14} />
-                Contact Form भरें - 24 घंटे में call back
+                Contact करें - हम जल्द जवाब देंगे
               </button>
             </div>
 
